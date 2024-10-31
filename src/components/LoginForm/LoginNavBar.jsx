@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 import logo from '../../assets/logo.png';
-import { LoginButton } from './LoginButton';
 import { Link } from 'react-router-dom';
 
-export const NavBar = () => {
+export const LoginNavBar = () => {
   return (
     <NavBarContainer>
       <Link to='/'>
@@ -11,11 +10,6 @@ export const NavBar = () => {
           src={logo}
           alt='logo'
         />
-      </Link>
-      <Link
-        to='/login'
-        style={{ textDecoration: 'none' }}>
-        <LoginButton />
       </Link>
     </NavBarContainer>
   );

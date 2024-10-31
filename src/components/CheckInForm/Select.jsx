@@ -3,9 +3,14 @@ import Select from 'react-select';
 import { stores } from '../../data/stores';
 import { employees } from '../../data/employees';
 
-export const SelectStoreAndName = () => {
+export const SelectStoreAndName = ({
+  storeValue,
+  setStoreValue,
+  nameValue,
+  setNameValue,
+}) => {
   const storesOptions = stores.map((store) => ({
-    value: store.name,
+    value: store.openingTime,
     label: store.name,
   }));
   storesOptions.sort((a, b) => a.label.localeCompare(b.label));
@@ -15,6 +20,16 @@ export const SelectStoreAndName = () => {
     label: employee.name,
   }));
   namesOptions.sort((a, b) => a.label.localeCompare(b.label));
+
+  const handleStoreChange = (selectedOption) => {
+    console.log(selectedOption);
+    setStoreValue(selectedOption);
+  };
+
+  const handleNameChange = (selectedOption) => {
+    console.log(selectedOption);
+    setNameValue(selectedOption);
+  };
 
   return (
     <SelectContainer>
@@ -29,8 +44,10 @@ export const SelectStoreAndName = () => {
         }}
         placeholder='Selecteaza magazinul'
         isSearchable={true}
+        value={storeValue}
         options={storesOptions}
         menuPlacement='bottom'
+        onChange={handleStoreChange}
       />
       <Select
         styles={{
@@ -44,7 +61,9 @@ export const SelectStoreAndName = () => {
         placeholder='Selecteaza vanzatorul'
         isSearchable={true}
         options={namesOptions}
+        value={nameValue}
         menuPlacement='bottom'
+        onChange={handleNameChange}
       />
     </SelectContainer>
   );
