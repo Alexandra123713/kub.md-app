@@ -1,4 +1,4 @@
-const stores = [
+export const stores = [
   {
     name: 'Lev Tolstoi',
     adress: 'sec. Centru, str. Lev Tolstoi 24/1',
