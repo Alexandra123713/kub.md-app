@@ -2,24 +2,35 @@ import { useState } from 'react';
 import styled from 'styled-components';
 
 export const CheckInButton = ({ storeValue, nameValue }) => {
-  const [information, setInformation] = useState({ delay: null, name: '' });
   const [isDisabled, setIsDisabled] = useState(false);
 
   const handleCheckIn = () => {
     const currentTime = new Date();
     const currentTimestamp = currentTime.getTime();
+    const currentDate = `${currentTime.getDate()}. ${currentTime.getMonth()}. ${currentTime.getFullYear()}`;
 
     if (storeValue && nameValue) {
       const openingTimestamp = storeValue.value;
       const delay = Math.floor(
         (currentTimestamp - openingTimestamp) / (1000 * 60)
       );
-      setInformation({
+      const newInformation = {
         delay: delay,
         name: nameValue.value,
-      });
+        date: currentDate,
+      };
+
       const confirmMessage = confirm('Magazinul si numele sunt corecte?');
       if (confirmMessage) {
+        const savedInformation =
+          JSON.parse(localStorage.getItem('information')) || [];
+
+        const updatedData = Array.isArray(savedInformation)
+          ? savedInformation
+          : [];
+
+        updatedData.push(newInformation);
+        localStorage.setItem('information', JSON.stringify(updatedData));
         alert('Check-in reusit!');
       } else return;
       setIsDisabled(true);
@@ -27,11 +38,12 @@ export const CheckInButton = ({ storeValue, nameValue }) => {
       alert('Selecteaza magazinul si vanzatorul');
     }
   };
-  console.log(information);
+
   return (
     <Button
       onClick={handleCheckIn}
-      disabled={isDisabled}>
+      // disabled={isDisabled}
+    >
       Check-in!
     </Button>
   );
