@@ -56,7 +56,7 @@ export const LoginForm = () => {
 };
 
 const FormContainer = styled.form`
-  margin: 16rem auto;
+  margin: 6rem auto;
   display: flex;
   flex-direction: column;
   align-items: center;

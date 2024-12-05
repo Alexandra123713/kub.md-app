@@ -1,52 +1,40 @@
 import { useState } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 
-export const CheckInButton = ({ storeValue, nameValue }) => {
-  const [isDisabled, setIsDisabled] = useState(false);
-
-  const handleCheckIn = () => {
-    const currentTime = new Date();
-    const currentTimestamp = currentTime.getTime();
-    const currentDate = `${currentTime.getDate()}. ${currentTime.getMonth()}. ${currentTime.getFullYear()}`;
-
+export const CheckInButton = ({
+  storeValue,
+  nameValue,
+  setStoreValue,
+  setNameValue,
+}) => {
+  const handleCheckIn = async () => {
     if (storeValue && nameValue) {
-      const openingTimestamp = storeValue.value;
-      const delay = Math.floor(
-        (currentTimestamp - openingTimestamp) / (1000 * 60)
-      );
+      const storeId = storeValue.id;
       const newInformation = {
-        delay: delay,
-        name: nameValue.value,
-        date: currentDate,
+        name: nameValue,
+        store_id: storeId,
       };
-
+      console.log(newInformation.name, newInformation.store_id);
       const confirmMessage = confirm('Magazinul si numele sunt corecte?');
+
       if (confirmMessage) {
-        const savedInformation =
-          JSON.parse(localStorage.getItem('information')) || [];
-
-        const updatedData = Array.isArray(savedInformation)
-          ? savedInformation
-          : [];
-
-        updatedData.push(newInformation);
-        localStorage.setItem('information', JSON.stringify(updatedData));
-        alert('Check-in reusit!');
+        try {
+          await axios.post('http://funsport95.com/api/checkin', newInformation);
+          alert('Check-in reusit!');
+          setStoreValue('');
+          setNameValue('');
+        } catch (error) {
+          console.error('Eroare:', error.response?.data || error.message);
+          alert('Numele introdus este gresit!');
+        }
       } else return;
-      setIsDisabled(true);
     } else {
       alert('Selecteaza magazinul si vanzatorul');
     }
   };
 
-  return (
-    <Button
-      onClick={handleCheckIn}
-      // disabled={isDisabled}
-    >
-      Check-in!
-    </Button>
-  );
+  return <Button onClick={handleCheckIn}>Check-in!</Button>;
 };
 
 const Button = styled.button`
@@ -55,7 +43,7 @@ const Button = styled.button`
   width: 16rem;
   height: 5rem;
   display: block;
-  margin: 20rem auto 0;
+  margin: 10rem auto 0;
   font-size: 2rem;
   cursor: pointer;
   opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
