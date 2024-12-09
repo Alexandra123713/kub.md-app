@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LoginNavBar } from './LoginNavBar';
@@ -24,13 +26,19 @@ export const LoginForm = () => {
     console.log(password);
   };
 
-  const handleFormSubmit = () => {
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
     if (login && password) {
       if (login === data.login && password === data.password) {
-        alert('Autentificare reusita');
         navigate('/results');
-      } else alert('Login sau parola gresite');
-    } else alert('Introdu login-ul si parola');
+      } else
+        toast.error('Login sau parola gresite', {
+          position: 'bottom-right',
+        });
+    } else
+      toast.warn('Introdu login-ul si parola', {
+        position: 'bottom-right',
+      });
   };
 
   return (
@@ -50,6 +58,7 @@ export const LoginForm = () => {
           onChange={handlePasswordChange}
         />
         <SignInButton />
+        <ToastContainer />
       </FormContainer>
     </>
   );

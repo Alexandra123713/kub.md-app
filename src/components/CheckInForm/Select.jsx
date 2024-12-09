@@ -1,4 +1,5 @@
 import { styled } from 'styled-components';
+import { useTranslation } from 'react-i18next';
 import Select from 'react-select';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
@@ -9,6 +10,7 @@ export const SelectStoreAndName = ({
   nameValue,
   setNameValue,
 }) => {
+  const { t } = useTranslation();
   const [storesOptions, setStoresOptions] = useState([]);
 
   const storesDataAPI = async () => {
@@ -47,12 +49,13 @@ export const SelectStoreAndName = ({
         styles={{
           control: (baseStyles) => ({
             ...baseStyles,
-            width: '20rem',
-            fontSize: '1.8rem',
+            width: '28rem',
+            fontSize: '1.4rem',
             cursor: 'text',
+            padding: '1rem',
           }),
         }}
-        placeholder='Selecteaza magazinul'
+        placeholder={t('storeSelect')}
         isSearchable={true}
         value={storeValue}
         options={storesOptions}
@@ -61,26 +64,38 @@ export const SelectStoreAndName = ({
       />
       <NameInput
         type='text'
-        placeholder='Introdu numele...'
+        placeholder={t('name')}
         value={nameValue}
         onChange={handleNameChange}
+      />
+      <ReasonInput
+        type='text'
+        placeholder={t('reason')}
       />
     </SelectContainer>
   );
 };
 
 const SelectContainer = styled.form`
-  max-width: 80rem;
   display: flex;
   justify-content: space-around;
-  margin: 10rem auto 0rem;
+  margin: 16rem auto 0rem;
 `;
 
 const NameInput = styled.input`
   font-family: 'Times New Roman', Times, serif;
-  font-size: 1.8rem;
+  font-size: 1.4rem;
   padding: 0 0.8rem;
   border: none;
   border-radius: 4px;
-  max-width: 320px;
+  width: 26rem;
+`;
+
+const ReasonInput = styled.input`
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 1.4rem;
+  padding: 0 0.8rem;
+  border: none;
+  border-radius: 4px;
+  width: 26rem;
 `;

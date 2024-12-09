@@ -1,10 +1,12 @@
+import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import logo from '../../assets/login-logo.png';
 
 export const LoginButton = () => {
+  const { t } = useTranslation();
   return (
     <Button type='submit'>
-      Login
+      {t('login')}
       <ButtonLogo
         src={logo}
         alt='login-logo'
@@ -14,11 +16,10 @@ export const LoginButton = () => {
 };
 
 const Button = styled.button`
-  width: 200px;
-  height: 60px;
+  padding: 0.7rem 1rem;
   background-color: #292929;
   color: white;
-  font-size: 2.4rem;
+  font-size: 1.8rem;
   display: flex;
   align-items: center;
   justify-content: space-around;

@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { NavBar } from './NavBar';
 import { SelectStoreAndName } from './Select';
 import { CheckInButton } from './CheckInButton';

@@ -1,4 +1,6 @@
 import Select from 'react-select';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import styled from 'styled-components';
 import DatePicker from 'react-datepicker';
@@ -126,11 +128,15 @@ export const Result = () => {
 
   const handleGetInformation = async () => {
     if (!nameValue) {
-      alert('Selecteaza vanzatorul!');
+      toast.warn('Selecteaza vanzatorul!', {
+        position: 'bottom-right',
+      });
       return;
     }
     if (!startDate || !endDate) {
-      alert('Selectează un interval de date!');
+      toast.warn('Selectează un interval de date!', {
+        position: 'bottom-right',
+      });
       return;
     }
     const employeeId = nameValue.id;
@@ -243,6 +249,7 @@ export const Result = () => {
             </tfoot>
           </Table>
         )}
+        <ToastContainer />
       </ResultContainer>
     </>
   );

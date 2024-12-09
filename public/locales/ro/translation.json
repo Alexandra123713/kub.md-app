@@ -1,0 +1,10 @@
+{
+    "login": "Autentificare",
+    "checkIn": "Check-in!",
+    "successCheckIn": "Check-in reusit!",
+    "errorNameIncorrect": "Numele introdus este greșit!",
+    "warnSelectStoreAndName": "Selectati magazinul și vânzătorul!",
+    "storeSelect": "Selectati magazinul",
+    "name": "Introduceti numele si prenumele...",
+    "reason": "Motivul intarzierii... *"
+}
