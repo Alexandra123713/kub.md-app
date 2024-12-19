@@ -5,6 +5,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
 import { LoginNavBar } from '../LoginForm/LoginNavBar';
 
@@ -17,6 +18,7 @@ export const Result = () => {
 	const [startDate, setStartDate] = useState(new Date());
 	const [endDate, setEndDate] = useState(null);
 	const [totalDelay, setTotalDelay] = useState(null);
+	const { t } = useTranslation();
 
 	const onChange = (dates) => {
 		const [start, end] = dates;
@@ -73,13 +75,13 @@ export const Result = () => {
 
 	const handleGetInformation = async () => {
 		if (!nameValue) {
-			toast.warn('Selecteaza vanzatorul!', {
+			toast.warn(t('selectName'), {
 				position: 'bottom-right',
 			});
 			return;
 		}
 		if (!startDate || !endDate) {
-			toast.warn('Selectează un interval de date!', {
+			toast.warn(t('selectInterval'), {
 				position: 'bottom-right',
 			});
 			return;
@@ -140,8 +142,7 @@ export const Result = () => {
 									zIndex: '2',
 								}),
 							}}
-							placeholder='Selecteaza vanzatorul'
-							isSearchable={true}
+							placeholder={t('selectName')}
 							options={nameOption}
 							value={nameValue}
 							menuPlacement='bottom'
@@ -158,18 +159,18 @@ export const Result = () => {
 						inline
 					/>
 					<InformationButton onClick={handleGetInformation}>
-						Information
+						{t('information')}
 					</InformationButton>
 				</FiltersContainer>
 				{showTable && (
 					<Table>
 						<thead>
 							<tr>
-								<TH>Data</TH>
-								<TH>Ora sosirii</TH>
-								<TH>Vanzator</TH>
-								<TH>Magazin</TH>
-								<TH>Intarziere</TH>
+								<TH>{t('date')}</TH>
+								<TH>{t('hour')}</TH>
+								<TH>{t('seller')}</TH>
+								<TH>{t('store')}</TH>
+								<TH>{t('delay')}</TH>
 							</tr>
 						</thead>
 						<tbody>
@@ -179,17 +180,17 @@ export const Result = () => {
 									<TD>{result.entry}</TD>
 									<TD>{result.name}</TD>
 									<TD>{result.store}</TD>
-									<TD>{result.delay} min</TD>
+									<TD>{result.delay} {t('min')}</TD>
 								</tr>
 							))}
 						</tbody>
 						<tfoot>
 							<tr>
-								<TDFoot>Total intarzieri</TDFoot>
+								<TDFoot>{t('totalDelay')}</TDFoot>
 								<TDFoot></TDFoot>
 								<TDFoot></TDFoot>
 								<TDFoot></TDFoot>
-								<TDFoot>{totalDelay} min</TDFoot>
+								<TDFoot>{totalDelay} {t('min')}</TDFoot>
 							</tr>
 						</tfoot>
 					</Table>
