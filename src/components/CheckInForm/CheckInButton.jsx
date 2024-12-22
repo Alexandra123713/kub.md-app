@@ -2,7 +2,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import 'react-toastify/dist/ReactToastify.css';
 import styled from 'styled-components';
-import axios from 'axios';
+import api from '../../api/api'
 
 export const CheckInButton = ({
   storeValue,
@@ -21,7 +21,7 @@ export const CheckInButton = ({
       console.log(newInformation.name, newInformation.store_id);
 
       try {
-        await axios.post('http://funsport95.com/api/checkin', newInformation);
+        await api.post('/checkin', newInformation);
         toast.success(t('successCheckIn'), {
           position: 'bottom-right',
         });

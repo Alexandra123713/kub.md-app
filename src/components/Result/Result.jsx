@@ -8,6 +8,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
 import { LoginNavBar } from '../LoginForm/LoginNavBar';
+import api from '../../api/api';
 
 export const Result = () => {
 	const [tableData, setTableData] = useState([]);
@@ -28,7 +29,7 @@ export const Result = () => {
 
 	const storesDataAPI = async () => {
 		try {
-			const result = await axios.get('http://funsport95.com/api/stores');
+			const result = await api.get('/stores');
 			const storesData = result.data.data;
 			console.log(storesData);
 			const options = storesData.map((store) => ({
@@ -48,7 +49,7 @@ export const Result = () => {
 
 	const employeeDataAPI = async () => {
 		try {
-			const result = await axios.get('http://funsport95.com/api/employees');
+			const result = await api.get('/employees');
 			const employeesForSelect = result.data;
 			console.log(employeesForSelect);
 			const employeeNameOptions = employeesForSelect.map((employee) => ({
@@ -91,8 +92,8 @@ export const Result = () => {
 		const dateTo = endDate.toISOString().split('T')[0];
 
 		try {
-			const result = await axios.get(
-				`http://funsport95.com/api/late-checkins?date_from=${dateFrom}&date_to=${dateTo}&employee_id=${employeeId}`
+			const result = await api.get(
+				`/late-checkins?date_from=${dateFrom}&date_to=${dateTo}&employee_id=${employeeId}`
 			);
 
 			console.log(result);
@@ -180,7 +181,9 @@ export const Result = () => {
 									<TD>{result.entry}</TD>
 									<TD>{result.name}</TD>
 									<TD>{result.store}</TD>
-									<TD>{result.delay} {t('min')}</TD>
+									<TD>
+										{result.delay} {t('min')}
+									</TD>
 								</tr>
 							))}
 						</tbody>
@@ -190,7 +193,9 @@ export const Result = () => {
 								<TDFoot></TDFoot>
 								<TDFoot></TDFoot>
 								<TDFoot></TDFoot>
-								<TDFoot>{totalDelay} {t('min')}</TDFoot>
+								<TDFoot>
+									{totalDelay} {t('min')}
+								</TDFoot>
 							</tr>
 						</tfoot>
 					</Table>
