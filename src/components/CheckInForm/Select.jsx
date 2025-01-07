@@ -9,6 +9,8 @@ export const SelectStoreAndName = ({
 	setStoreValue,
 	nameValue,
 	setNameValue,
+	reasonValue,
+	setReasonValue,
 }) => {
 	const { t } = useTranslation();
 	const [storesOptions, setStoresOptions] = useState([]);
@@ -42,6 +44,9 @@ export const SelectStoreAndName = ({
 	const handleNameChange = (event) => {
 		setNameValue(event.target.value);
 	};
+	const handleReasonChange = (event) => {
+		setReasonValue(event.target.value);
+	};
 
 	return (
 		<SelectContainer>
@@ -49,7 +54,7 @@ export const SelectStoreAndName = ({
 				styles={{
 					control: (baseStyles) => ({
 						...baseStyles,
-						fontSize: '1.4rem',
+						fontSize: '1.2rem',
 						cursor: 'text',
 						padding: '1rem',
 					}),
@@ -74,6 +79,8 @@ export const SelectStoreAndName = ({
 			<ReasonInput
 				type='text'
 				placeholder={t('reason')}
+				value={reasonValue}
+				onChange={handleReasonChange}
 			/>
 		</SelectContainer>
 	);
@@ -87,28 +94,19 @@ const SelectContainer = styled.form`
 
 const NameInput = styled.input`
 	font-family: 'Times New Roman', Times, serif;
-	font-size: 1.4rem;
+	font-size: 1.2rem;
 	padding: 0.8rem;
 	border: none;
 	border-radius: 4px;
-	width: 25%;
+	width: 30%;
 	box-sizing: border-box;
-	&::placeholder {
-		white-space: pre-wrap;
-	}
-	@media (max-width: 1024px) {
-		font-size: 1rem;
-	}
 `;
 
 const ReasonInput = styled.input`
 	font-family: 'Times New Roman', Times, serif;
-	font-size: 1.4rem;
+	font-size: 1.2rem;
 	padding: 0 0.8rem;
 	border: none;
 	border-radius: 4px;
 	width: 25%;
-	@media (max-width: 1024px) {
-		font-size: 1rem;
-	}
 `;

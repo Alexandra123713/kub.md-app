@@ -1,13 +1,12 @@
 import Select from 'react-select';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import axios from 'axios';
 import styled from 'styled-components';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
-import { LoginNavBar } from '../LoginForm/LoginNavBar';
+import { AdminNavBar } from './AdminNavbar';
 import api from '../../api/api';
 
 export const Result = () => {
@@ -69,10 +68,8 @@ export const Result = () => {
 	}, []);
 
 	const handleNameChange = (selectedOption) => {
-		console.log('Selected option is ' + selectedOption.value);
 		setNameValue(selectedOption);
 	};
-	console.log('Name value is ' + nameValue);
 
 	const handleGetInformation = async () => {
 		if (!nameValue) {
@@ -99,6 +96,7 @@ export const Result = () => {
 			console.log(result);
 
 			const resultsForTable = result.data.data;
+			console.log('result from api is:', resultsForTable);
 			const totalDelay = result.data.total_minutes_late;
 
 			const formattedTableData = resultsForTable.map((entry) => ({
@@ -113,6 +111,7 @@ export const Result = () => {
 				}),
 				name: entry.employee.name,
 				store: entry.store.name,
+				comment: entry.comment,
 				delay: entry.minutes_late,
 			}));
 
@@ -126,7 +125,7 @@ export const Result = () => {
 
 	return (
 		<>
-			<LoginNavBar />
+			<AdminNavBar />
 			<ResultContainer>
 				<FiltersContainer>
 					<>
@@ -171,6 +170,7 @@ export const Result = () => {
 								<TH>{t('hour')}</TH>
 								<TH>{t('seller')}</TH>
 								<TH>{t('store')}</TH>
+								<TH style={{ width: '35%' }}>{t('reasonResult')}</TH>
 								<TH>{t('delay')}</TH>
 							</tr>
 						</thead>
@@ -181,7 +181,11 @@ export const Result = () => {
 									<TD>{result.entry}</TD>
 									<TD>{result.name}</TD>
 									<TD>{result.store}</TD>
-									<TD>
+									<TD style={{ width: '35%' }}>{result.comment}</TD>
+									<TD
+										style={{
+											color: result.delay > 0 ? 'red' : '#000000',
+										}}>
 										{result.delay} {t('min')}
 									</TD>
 								</tr>
@@ -190,6 +194,7 @@ export const Result = () => {
 						<tfoot>
 							<tr>
 								<TDFoot>{t('totalDelay')}</TDFoot>
+								<TDFoot></TDFoot>
 								<TDFoot></TDFoot>
 								<TDFoot></TDFoot>
 								<TDFoot></TDFoot>
@@ -224,6 +229,9 @@ const InformationButton = styled.div`
 	padding: 0.5rem;
 	text-align: center;
 	cursor: pointer;
+	&:hover {
+		background: #639d06;
+	}
 `;
 
 const ResultContainer = styled.div`
@@ -241,11 +249,13 @@ const Table = styled.table`
 const TD = styled.td`
 	background-color: #13e2e2;
 	text-align: center;
+	padding: 0.2rem;
 `;
 
 const TH = styled.th`
 	background-color: gray;
 	border: 1px solid black;
+	padding: 0.4rem;
 `;
 
 const TDFoot = styled.td`
