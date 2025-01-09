@@ -166,6 +166,7 @@ export const Result = () => {
 					<Table>
 						<thead>
 							<tr>
+								<TH></TH>
 								<TH>{t('date')}</TH>
 								<TH>{t('hour')}</TH>
 								<TH>{t('seller')}</TH>
@@ -177,6 +178,7 @@ export const Result = () => {
 						<tbody>
 							{tableData.map((result, index) => (
 								<tr key={index}>
+									<TD>{index+1}</TD>
 									<TD>{result.date}</TD>
 									<TD>{result.entry}</TD>
 									<TD>{result.name}</TD>
@@ -194,6 +196,7 @@ export const Result = () => {
 						<tfoot>
 							<tr>
 								<TDFoot>{t('totalDelay')}</TDFoot>
+								<TDFoot></TDFoot>
 								<TDFoot></TDFoot>
 								<TDFoot></TDFoot>
 								<TDFoot></TDFoot>
