@@ -65,10 +65,11 @@ const Button = styled.button`
 		background: #639d06;
 	}
 
-	@media (max-width: 425px) {
+	@media (max-width: 700px) {
 		background: #ccc;
 		color: #666;
 		cursor: not-allowed;
 		pointer-events: none;
+		margin: 8rem auto 0;
 	}
 `;

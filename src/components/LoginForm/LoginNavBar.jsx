@@ -26,6 +26,6 @@ const NavBarContainer = styled.div`
 `;
 
 const Logo = styled.img`
-	width: 200px;
-	height: 60px;
+		width: 12.5rem;
+		height: 3.75rem;
 `;

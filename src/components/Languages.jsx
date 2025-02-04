@@ -31,8 +31,15 @@ const LanguageButton = styled.button`
 	align-items: center;
 	justify-content: center;
 	gap: 0.2rem;
+	font-size: 1rem;
+	@media (max-width: 600px) {
+		font-size: 0.5rem;
+	}
 `;
 
 const FlagLogo = styled.img`
 	width: 1rem;
+	@media (max-width: 600px) {
+		width: 0.5rem;
+	}
 `;

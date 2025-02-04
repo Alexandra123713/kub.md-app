@@ -50,26 +50,28 @@ export const SelectStoreAndName = ({
 
 	return (
 		<SelectContainer>
-			<Select
-				styles={{
-					control: (baseStyles) => ({
-						...baseStyles,
-						fontSize: '1.2rem',
-						cursor: 'text',
-						padding: '1rem',
-					}),
-					container: (baseStyles) => ({
-						...baseStyles,
-						width: '25%',
-					}),
-				}}
-				placeholder={t('storeSelect')}
-				isSearchable={true}
-				value={storeValue}
-				options={storesOptions}
-				menuPlacement='bottom'
-				onChange={handleStoreChange}
-			/>
+			<SelectWrapper>
+				<Select
+					styles={{
+						control: (baseStyles) => ({
+							...baseStyles,
+							fontSize: '1.2rem',
+							cursor: 'text',
+							padding: '1rem',
+						}),
+						container: (baseStyles) => ({
+							...baseStyles,
+							width: '100%',
+						}),
+					}}
+					placeholder={t('storeSelect')}
+					isSearchable={true}
+					value={storeValue}
+					options={storesOptions}
+					menuPlacement='bottom'
+					onChange={handleStoreChange}
+				/>
+			</SelectWrapper>
 			<NameInput
 				type='text'
 				placeholder={t('name')}
@@ -90,6 +92,22 @@ const SelectContainer = styled.form`
 	display: flex;
 	justify-content: space-around;
 	margin: 16rem auto 0rem;
+
+	@media (max-width: 500px) {
+		flex-direction: column;
+		gap: 3rem;
+		align-items: center;
+		width: 100%;
+		margin: 10rem auto 0rem;
+	}
+`;
+
+const SelectWrapper = styled.div`
+	width: 25%;
+
+	@media (max-width: 500px) {
+		width: 80%;
+	}
 `;
 
 const NameInput = styled.input`
@@ -100,13 +118,24 @@ const NameInput = styled.input`
 	border-radius: 4px;
 	width: 30%;
 	box-sizing: border-box;
+
+	@media (max-width: 500px) {
+		padding: 2.2rem;
+		width: 80%;
+	}
 `;
 
 const ReasonInput = styled.input`
 	font-family: 'Times New Roman', Times, serif;
 	font-size: 1.2rem;
-	padding: 0 0.8rem;
+	padding: 0.8rem;
 	border: none;
 	border-radius: 4px;
 	width: 25%;
+	box-sizing: border-box;
+
+	@media (max-width: 500px) {
+		padding: 2.2rem;
+		width: 80%;
+	}
 `;
