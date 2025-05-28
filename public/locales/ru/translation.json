@@ -33,7 +33,7 @@
 	"employeeDeleted": "Сотрудник был успешно удалён из списка!",
 	"employeeAdded": "Angajatul a fost adăugat cu succes!",
 	"errorDeletingEmployee": "Возникла ошибка!",
-	"areYouSureDelete": "Вы уверены что хотите удалить сотрудника",
+	"areYouSureDelete": "Вы уверены что хотите удалить",
 	"confirm": "Да",
 	"cancel": "Нет",
 	"stores": "Магазины",
