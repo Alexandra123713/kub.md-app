@@ -30,7 +30,6 @@ export const Result = () => {
 		try {
 			const result = await api.get('/stores');
 			const storesData = result.data.data;
-			console.log(storesData);
 			const options = storesData.map((store) => ({
 				id: store.id,
 				value: store.opening_time,
@@ -50,7 +49,6 @@ export const Result = () => {
 		try {
 			const result = await api.get('/employees');
 			const employeesForSelect = result.data;
-			console.log(employeesForSelect);
 			const employeeNameOptions = employeesForSelect.map((employee) => ({
 				id: employee.id,
 				value: employee.name,
@@ -93,10 +91,7 @@ export const Result = () => {
 				`/late-checkins?date_from=${dateFrom}&date_to=${dateTo}&employee_id=${employeeId}`
 			);
 
-			console.log(result);
-
 			const resultsForTable = result.data.data;
-			console.log('result from api is:', resultsForTable);
 			const totalDelay = result.data.total_minutes_late;
 
 			const formattedTableData = resultsForTable.map((entry) => ({

@@ -19,7 +19,6 @@ export const SelectStoreAndName = ({
 		try {
 			const result = await axios.get('http://funsport95.com/api/stores');
 			const storesData = result.data.data;
-			console.log(storesData);
 			const options = storesData.map((store) => ({
 				id: store.id,
 				value: store.opening_time,
@@ -36,9 +35,7 @@ export const SelectStoreAndName = ({
 	}, []);
 
 	const handleStoreChange = (selectedOption) => {
-		console.log(`Selected option is ${selectedOption}`);
 		setStoreValue(selectedOption);
-		console.log(`Selected option is ${storeValue}`);
 	};
 
 	const handleNameChange = (event) => {

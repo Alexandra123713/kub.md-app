@@ -23,12 +23,10 @@ export const LoginForm = () => {
 
 	const handleLoginChange = (e) => {
 		setLogin(e.target.value);
-		console.log(login);
 	};
 
 	const handlePasswordChange = (e) => {
 		setPassword(e.target.value);
-		console.log(password);
 	};
 	const togglePasswordVisibility = () => {
 		setPasswordVisible((prevState) => !prevState);

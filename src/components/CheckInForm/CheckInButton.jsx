@@ -24,7 +24,6 @@ export const CheckInButton = ({
 
 			try {
 				const response = await api.post('/checkin', newInformation);
-				console.log('API Response:', response);
 				toast.success(t('successCheckIn'), {
 					position: 'bottom-right',
 				});

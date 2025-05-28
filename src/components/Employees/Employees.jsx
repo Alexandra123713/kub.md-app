@@ -81,7 +81,6 @@ export const Employees = () => {
 			const response = await api.post('/employees', newEmployee);
 			await employeeDataAPI();
 			setNewEmployeeName('');
-			console.log('New employee added:', response.data);
 		} catch (error) {
 			console.error('Error adding new employee:', error);
 		}
